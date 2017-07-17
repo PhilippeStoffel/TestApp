@@ -3,7 +3,7 @@ sudo: false
 jdk: oraclejdk7
 env:
   matrix:
-    - ANDROID_TARGET=android-18 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
   global:
     # wait up to 10 minutes for adb to connect to emulator
     - ADB_INSTALL_TIMEOUT=10
@@ -12,8 +12,8 @@ android:
   components:
   - platform-tools
   - tools
-  - build-tools-23.0.2
-  - android-23
+  - build-tools-26.0.0
+  - android-25
 
   # Additional components
   - extra-google-m2repository
@@ -21,7 +21,7 @@ android:
   - extra-android-support
 
   # Emulator for the tests
-  - sys-img-armeabi-v7a-android-18
+  - sys-img-armeabi-v7a-android-25
 
 cache:
   directories:
@@ -38,9 +38,6 @@ addons:
     paths:
       - $(git ls-files -o | grep build/outputs | tr "\n" ":")
 
-before_install:
-  - pip install --user codecov
-
 before_script:
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
@@ -52,10 +49,6 @@ script:
   - adb shell input keyevent 82 &
   - ./gradlew connectedAndroidTest -PdisablePreDex --continue --stacktrace
   - rm /home/travis/.gradle/caches/2.8/plugin-resolution/cache.properties.lock
-
-after_success:
-  - ./gradlew jacocoFullReport
-  - codecov
 
 after_failure:
   - pandoc builder/build/reports/tests/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'
