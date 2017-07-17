@@ -3,10 +3,11 @@ sudo: false
 jdk: oraclejdk7
 env:
   matrix:
-    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-25 ANDROID_ABI=google_apis/armeabi-v7a
   global:
     # wait up to 10 minutes for adb to connect to emulator
     - ADB_INSTALL_TIMEOUT=10
+    - ANDROID_API_LEVEL=25
 
 android:
   components:
@@ -21,7 +22,7 @@ android:
   - extra-android-support
 
   # Emulator for the tests
-  - sys-img-armeabi-v7a-android-25
+  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
 
 cache:
   directories:
