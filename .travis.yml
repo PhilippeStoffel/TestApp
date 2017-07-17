@@ -3,11 +3,12 @@ sudo: false
 jdk: oraclejdk7
 env:
   matrix:
-    - ANDROID_TARGET=android-25 ANDROID_ABI=google_apis/armeabi-v7a
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
   global:
     # wait up to 10 minutes for adb to connect to emulator
     - ADB_INSTALL_TIMEOUT=10
     - ANDROID_API_LEVEL=25
+    - ANDROID_TAG=google_apis
 
 android:
   components:
@@ -22,7 +23,7 @@ android:
   - extra-android-support
 
   # Emulator for the tests
-  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+  - sys-img-armeabi-v7a-google_apis-25
 
 cache:
   directories:
@@ -40,7 +41,7 @@ addons:
       - $(git ls-files -o | grep build/outputs | tr "\n" ":")
 
 before_script:
-  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force -n test -t "android-25" --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -no-skin -no-audio -no-window &
 
 script:
