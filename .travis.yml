@@ -46,7 +46,7 @@ before_install:
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   
 before_script:
-  - echo no | android create avd --force -n test -t "android-23" --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - echo no | android create avd --force -n test -t "android-22" --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -no-skin -no-audio -no-window &
 
 script:
