@@ -23,7 +23,7 @@ android:
   - extra-android-support
 
   # Emulator for the tests
-  - sys-img-armeabi-v7a-google_apis-23
+  - sys-img-armeabi-v7a-google_apis-22
 
 cache:
   directories:

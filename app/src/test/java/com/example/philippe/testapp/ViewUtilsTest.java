@@ -1,3 +1,5 @@
+package com.example.philippe.testapp;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import static org.mockito.Mockito.*;

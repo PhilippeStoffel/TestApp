@@ -1,3 +1,5 @@
+package com.example.philippe.testapp;
+
 import com.example.philippe.testapp.utils.DateUtils;
 import com.example.philippe.testapp.utils.SystemUtils;
 
