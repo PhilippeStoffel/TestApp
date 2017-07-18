@@ -12,8 +12,8 @@ env:
 
 android:
   components:
-  - platform-tools
-  - tools
+#  - platform-tools
+#  - tools
   - build-tools-23.0.3
   - android-23
 
@@ -51,7 +51,7 @@ before_script:
 
 script:
   - ./gradlew check -PdisablePreDex --continue --stacktrace
-#  - android-wait-for-emulator
+  - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
   - ./gradlew connectedAndroidTest -PdisablePreDex --continue --stacktrace
